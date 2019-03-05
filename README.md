@@ -1,2 +1,2 @@
-# CISC-124-PASS-3
-Final Project: TBH
+# Aim
+To implement a small and simple prototype tool, named MTOptimizer, to explore rough fleet size optimizations in the hourly deployment of the vehicles used in the different public transportation modalities (i.e., buses, subways, trains) at the city of Toronto. The tool takes as input: 1) a representative sample of a typical workday passenger ridership (approximately 10% of the true number of daily passengers) for all means of transportation, 2) fleet descriptions and vehicle properties for each means of transportation. The tool outputs hourly estimates of the optimal number of vehicles, for each means of transportation, that should be in operation, in a 24-hour period, to satisfy the projected demand indicated by the processed sample.
