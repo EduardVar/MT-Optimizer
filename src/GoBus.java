@@ -15,6 +15,7 @@ public final class GoBus extends Bus
 	@Override
 	public String toString()
 	{
-		return "GoBus [unitNumber=" + unitNumber + ", idNumber=" + idNumber + ", capacity=" + capacity + "]";
+		return "GoBus [unitNumber=" + unitNumber + ", idNumber=" + idNumber +
+				", capacity=" + capacity + "]";
 	}
 }

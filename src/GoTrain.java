@@ -15,6 +15,7 @@ public final class GoTrain extends Vehicle
 	@Override
 	public String toString()
 	{
-		return "GoTrain [unitNumber=" + unitNumber + ", idNumber=" + idNumber + ", capacity=" + capacity + "]";
+		return "GoTrain [unitNumber=" + unitNumber + ", idNumber=" + idNumber +
+				", capacity=" + capacity + "]";
 	}
 }

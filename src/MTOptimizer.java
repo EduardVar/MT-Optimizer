@@ -61,8 +61,6 @@ public class MTOptimizer
 				addRider(line);
 				break;
 			}
-			
-			count++;
 		}
 		
 		br.close();
@@ -74,30 +72,8 @@ public class MTOptimizer
 		
 		try
 		{
-			String ID = content[0];
-			char modality = content[1].charAt(0);
-			char ageGroup = content[2].charAt(0);
-			int hour = Integer.parseInt(content[3]);
-			String date = content[4];
-			
-			if (!(ID.length() == 7 || ID.length() == 14 || ID.equals("*")))
-				throw new IDFormatException(content[0]);
-			
-			if ((content[1].length() != 1) || !(modality == 'S' ||
-					modality == 'G' || modality == 'X' ||
-					modality == 'C' || modality == 'D'))
-				throw new ModalityFormatException(content[1]);
-			
-			if ((content[2].length() != 1) || !(ageGroup == 'C' ||
-					ageGroup == 'A' || ageGroup == 'S'))
-				throw new AgeFormatException(content[2]);
-						
-			if (hour < 1 || hour > 24)
-				throw new HourOutOfRangeException(content[3]);
-			
-			//CHECK IF DATE WORKS
-			
-			people.add(new Person(ID, modality, ageGroup, hour, date));
+			people.add(new Person(content[0], content[1], content[2],
+					content[3], content[4]));
 		}
 		catch (NumberFormatException | ArrayIndexOutOfBoundsException |
 				IDFormatException | AgeFormatException | 
@@ -106,11 +82,6 @@ public class MTOptimizer
 			System.out.println(e + " [CAUGHT]");
 			System.out.println(line);
 		}
-		catch (Exception e) {
-			System.out.println(line);
-		}
-		
-		
 	}
 	
 	public static void main(String[] args) throws IOException
@@ -120,6 +91,8 @@ public class MTOptimizer
 		
 		for (String name: fileNames)
 			readInFile(name);
+		
+		System.out.println(vehicles);
 		
 //		for (ArrayList<Vehicle> vehicleList : vehicles)
 //			for (Vehicle vehicle : vehicleList)

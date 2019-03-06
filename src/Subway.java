@@ -32,9 +32,11 @@ public final class Subway extends Vehicle
 	@Override
 	public String toString()
 	{
-		return "Subway [numOfCars=" + numOfCars + ", passPerCar=" + passPerCar + ", operationalStatus="
-				+ operationalStatus + ", operationalDate=" + operationalDate + ", unitNumber=" + unitNumber
-				+ ", idNumber=" + idNumber + ", capacity=" + capacity + "]";
+		return "Subway [numOfCars=" + numOfCars + ", passPerCar=" +
+				passPerCar + ", operationalStatus=" + operationalStatus +
+				", operationalDate=" + operationalDate + ", unitNumber=" +
+				unitNumber + ", idNumber=" + idNumber + ", capacity=" +
+				capacity + "]";
 	}
 	
 	
