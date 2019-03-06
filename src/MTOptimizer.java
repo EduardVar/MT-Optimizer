@@ -1,16 +1,15 @@
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-
 /**
  * Author:	Eduard Varshavsky
  * NetID:	18ev
  * Date:	February 21, 2019
  * Desc:	
  */
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class MTOptimizer
 {
@@ -20,12 +19,12 @@ public class MTOptimizer
 	private static ArrayList<Bus> buses = new ArrayList<>();
 	private static ArrayList<GoBus> goBuses = new ArrayList<>();
 	
+	@SuppressWarnings("unchecked")
 	private static ArrayList<Vehicle>[] vehicles = 
 			(ArrayList<Vehicle>[])new ArrayList[]
 			{subways, goTrains, streetCars, buses, goBuses};
 	
 	private static ArrayList<Person> people = new ArrayList<>();
-	
 	
 	public static void readInFile(String pathname) throws IOException
 	{
@@ -61,9 +60,9 @@ public class MTOptimizer
 			case "ridership.txt":
 				addRider(line);
 				break;
-			default:
-				break;
 			}
+			
+			count++;
 		}
 		
 		br.close();
@@ -82,42 +81,33 @@ public class MTOptimizer
 			String date = content[4];
 			
 			if (!(ID.length() == 7 || ID.length() == 14 || ID.equals("*")))
-			{
-				System.out.println("ID ERROR");
-				throw new Exception();
-			}
+				throw new IDFormatException(content[0]);
 			
-			if (!(modality == 'S' || modality == 'G' || modality == 'X' || modality == 'C' || modality == 'D'))
-			{
-				System.out.println("MODALITY ERROR");
-				throw new Exception();
-			}
+			if ((content[1].length() != 1) || !(modality == 'S' ||
+					modality == 'G' || modality == 'X' ||
+					modality == 'C' || modality == 'D'))
+				throw new ModalityFormatException(content[1]);
 			
-			if (!(ageGroup == 'C' || ageGroup == 'A' || ageGroup == 'S'))
-			{
-				System.out.println("AGE GROUP ERROR");
-				throw new Exception();
-			}
-			
-			
+			if ((content[2].length() != 1) || !(ageGroup == 'C' ||
+					ageGroup == 'A' || ageGroup == 'S'))
+				throw new AgeFormatException(content[2]);
+						
 			if (hour < 1 || hour > 24)
-			{
-				System.out.println("HOUR ERROR");
-				throw new Exception();
-			}
+				throw new HourOutOfRangeException(content[3]);
+			
+			//CHECK IF DATE WORKS
 			
 			people.add(new Person(ID, modality, ageGroup, hour, date));
 		}
-		catch (NumberFormatException e) {
+		catch (NumberFormatException | ArrayIndexOutOfBoundsException |
+				IDFormatException | AgeFormatException | 
+				ModalityFormatException | HourOutOfRangeException e) 
+		{
 			System.out.println(e + " [CAUGHT]");
-			//System.out.println(line);
-		}
-		catch (ArrayIndexOutOfBoundsException e) {
-			System.out.println(e + " [CAUGHT]");
-			//System.out.println(line);
+			System.out.println(line);
 		}
 		catch (Exception e) {
-			//System.out.println(line);
+			System.out.println(line);
 		}
 		
 		
