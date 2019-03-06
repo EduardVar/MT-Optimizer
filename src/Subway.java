@@ -13,13 +13,29 @@ public final class Subway extends Vehicle
 	private char operationalStatus;
 	private String operationalDate;
 	
-	public Subway(int unitNumber, String idNumber, int capacity, int numOfCars,
-			int passPerCar, char operationalStatus, String operationalDate)
+	public Subway(String unitNumber, String idNumber,
+			String numOfCars, String passPerCar, String operationalStatus,
+			String operationalDate)
 	{
-		super(unitNumber, idNumber, capacity);
-		this.numOfCars = numOfCars;
-		this.passPerCar = passPerCar;
-		this.operationalStatus = operationalStatus;
+		super(unitNumber, idNumber, calcCapacity(numOfCars, passPerCar));
+		this.numOfCars = Integer.parseInt(numOfCars);
+		this.passPerCar = Integer.parseInt(passPerCar);
+		this.operationalStatus = operationalStatus.charAt(0);
 		this.operationalDate = operationalDate;
 	}
+	
+	private static String calcCapacity(String numCars, String perCar)
+	{
+		return (Integer.parseInt(numCars) * Integer.parseInt(perCar)) + "";
+	}
+
+	@Override
+	public String toString()
+	{
+		return "Subway [numOfCars=" + numOfCars + ", passPerCar=" + passPerCar + ", operationalStatus="
+				+ operationalStatus + ", operationalDate=" + operationalDate + ", unitNumber=" + unitNumber
+				+ ", idNumber=" + idNumber + ", capacity=" + capacity + "]";
+	}
+	
+	
 }

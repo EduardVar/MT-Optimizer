@@ -12,16 +12,11 @@ public abstract class Vehicle
 	protected String idNumber;
 	protected int capacity;
 	
-	protected Vehicle(int unitNumber, String idNumber, int capacity)
+	protected Vehicle(String unitNumber, String idNumber, String capacity)
 	{
-		this.unitNumber = unitNumber;
+		this.unitNumber = Integer.parseInt(unitNumber);
 		this.idNumber = idNumber;
-		this.capacity = capacity;
-	}
-	
-	protected Vehicle(int unitNumber, String idNumber)
-	{
-		this(unitNumber, idNumber, -1);
+		this.capacity = Integer.parseInt(capacity);
 	}
 	
 	protected Vehicle()
@@ -30,6 +25,10 @@ public abstract class Vehicle
 		idNumber = "~NONE~";
 		capacity = -1;
 	}
-	
-	
+
+	@Override
+	public String toString()
+	{
+		return "Vehicle [unitNumber=" + unitNumber + ", idNumber=" + idNumber + ", capacity=" + capacity + "]";
+	}
 }
