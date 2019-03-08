@@ -6,9 +6,12 @@
  */
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
 public class MTOptimizer
@@ -82,6 +85,27 @@ public class MTOptimizer
 			System.out.println(e + " [CAUGHT]");
 			System.out.println(line);
 		}
+	}
+	
+	//Fix this up 
+	public static void writeToFile(String fileName, String content) 
+			throws IOException
+	{
+		//Creates a new FileOutputSteam object using fileName given
+		FileOutputStream outFile = new FileOutputStream(fileName);
+		
+		//Creates a new OutputStreamWriter object in utf-8 using outFile
+		OutputStreamWriter outStream = new OutputStreamWriter(outFile, 
+				"utf-8");
+		
+		//Makes a new BufferedWrite object called writer using outStream
+		BufferedWriter writer = new BufferedWriter(outStream);
+		
+		//Writes to writer with the content given as a parameter
+		writer.write(content);
+		
+		//Closes writer to not use any extra resources
+		writer.close();
 	}
 	
 	public static void main(String[] args) throws IOException
