@@ -40,8 +40,6 @@ public final class Person
 		if (hour < 1 || hour > 24)
 			throw new HourOutOfRangeException(item3);
 		
-		//CHECK IF DATE WORKS
-		
 		this.ID = ID;
 		this.modality = modality;
 		this.ageGroup = ageGroup;

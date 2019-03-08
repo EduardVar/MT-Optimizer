@@ -5,9 +5,14 @@
  * Desc:	
  */
 
+import java.util.ArrayList;
+import java.util.Random;
+
 public abstract class Vehicle
 {
-	//MIGHT NEED TO CHANGE 
+	private static Random random = new Random();
+	
+	//CHANGE TO PRIVATE LATER AND USE GETTER/SETTERS INSTEAD
 	protected int unitNumber;
 	protected String idNumber;
 	protected int capacity;
@@ -30,5 +35,35 @@ public abstract class Vehicle
 	public String toString()
 	{
 		return "Vehicle [unitNumber=" + unitNumber + ", idNumber=" + idNumber + ", capacity=" + capacity + "]";
+	}
+	
+	//Non inclusive
+	public static int generateNumber(int low, int high)
+	{
+		return random.nextInt(high - low) + low;
+	}
+
+	public int getCapacity()
+	{
+		return capacity;
+	}
+	
+	public static ArrayList<Vehicle> assembleFleet(ArrayList<Vehicle> availableVehicles, int toFill)
+	{
+		int leftToFill = toFill;
+		
+		ArrayList<Vehicle> fleet = new ArrayList<>();
+		
+		//Randomly choose
+		while (leftToFill > 0)
+		{
+			Vehicle toAdd = availableVehicles.get(generateNumber(0, availableVehicles.size()));
+			
+			leftToFill -= toAdd.getCapacity();
+			
+			availableVehicles.remove(toAdd);
+		}
+		
+		return fleet;
 	}
 }

@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * Author:	Eduard Varshavsky
  * NetID:	18ev
@@ -28,6 +30,29 @@ public final class Subway extends Vehicle
 	{
 		return (Integer.parseInt(numCars) * Integer.parseInt(perCar)) + "";
 	}
+	
+	
+	public static ArrayList<Vehicle> assembleFleet(ArrayList<Vehicle> availableVehicles, int toFill)
+	{
+		ArrayList<Subway> allSubways = new ArrayList<>();
+		
+		for (Vehicle vehicle : availableVehicles)
+			allSubways.add((Subway)vehicle);
+		
+		return Vehicle.assembleFleet(getAvailable(allSubways), toFill);
+	}
+	
+	public static ArrayList<Vehicle> getAvailable(ArrayList<Subway> allSubways)
+	{
+		ArrayList<Vehicle> available = new ArrayList<>();
+		
+		//Makes only available
+		for (Subway subway : allSubways)
+			if (subway.getOperationalStatus() == 'A')
+				available.add(subway);
+		
+		return available;
+	}
 
 	@Override
 	public String toString()
@@ -38,6 +63,9 @@ public final class Subway extends Vehicle
 				unitNumber + ", idNumber=" + idNumber + ", capacity=" +
 				capacity + "]";
 	}
-	
-	
+
+	public char getOperationalStatus()
+	{
+		return operationalStatus;
+	}	
 }

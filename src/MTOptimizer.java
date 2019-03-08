@@ -92,7 +92,8 @@ public class MTOptimizer
 		for (String name: fileNames)
 			readInFile(name);
 		
-		System.out.println(vehicles);
+		System.out.println(vehicles); //del later
+		
 		
 //		for (ArrayList<Vehicle> vehicleList : vehicles)
 //			for (Vehicle vehicle : vehicleList)
