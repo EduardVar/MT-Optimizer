@@ -8,7 +8,7 @@
 import java.util.ArrayList;
 import java.util.Random;
 
-public abstract class Vehicle
+public abstract class Vehicle implements Drivables
 {
 	private static Random random = new Random();
 	
@@ -48,7 +48,7 @@ public abstract class Vehicle
 		return capacity;
 	}
 	
-	public static ArrayList<Vehicle> assembleFleet(ArrayList<Vehicle> availableVehicles, int toFill)
+	public ArrayList<Vehicle> assembleFleet(ArrayList<Vehicle> availableVehicles, int toFill)
 	{
 		int leftToFill = toFill;
 		

@@ -22,12 +22,20 @@ public class MTOptimizer
 	private static ArrayList<Bus> buses = new ArrayList<>();
 	private static ArrayList<GoBus> goBuses = new ArrayList<>();
 	
+//	@SuppressWarnings("unchecked")
+//	//REPLACES VEHICLES With an interface potentially?
+//	private static ArrayList<Vehicle>[] vehicles = 
+//			(ArrayList<Vehicle>[])new ArrayList[]
+//			{subways, goTrains, streetCars, buses, goBuses};
+	
 	@SuppressWarnings("unchecked")
-	private static ArrayList<Vehicle>[] vehicles = 
-			(ArrayList<Vehicle>[])new ArrayList[]
+	private static ArrayList<Drivables>[] vehicles = 
+			(ArrayList<Drivables>[])new ArrayList[]
 			{subways, goTrains, streetCars, buses, goBuses};
 	
-	private static ArrayList<Person> people = new ArrayList<>();
+	private static ArrayList<Passenger> passengers = new ArrayList<>();
+	
+	private static String date = "20190304";
 	
 	public static void readInFile(String pathname) throws IOException
 	{
@@ -75,7 +83,11 @@ public class MTOptimizer
 		
 		try
 		{
-			people.add(new Person(content[0], content[1], content[2],
+			if (!(content[4].equals(date)))
+				System.out.println("AHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHh\n" +line);
+			
+			
+			passengers.add(new Passenger(content[0], content[1], content[2],
 					content[3], content[4]));
 		}
 		catch (NumberFormatException | ArrayIndexOutOfBoundsException |
@@ -87,7 +99,7 @@ public class MTOptimizer
 		}
 	}
 	
-	//Fix this up 
+	//Fix this up or just replace it lol
 	public static void writeToFile(String fileName, String content) 
 			throws IOException
 	{

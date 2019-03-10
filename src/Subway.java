@@ -32,14 +32,14 @@ public final class Subway extends Vehicle
 	}
 	
 	
-	public static ArrayList<Vehicle> assembleFleet(ArrayList<Vehicle> availableVehicles, int toFill)
+	public ArrayList<Vehicle> assembleFleet(ArrayList<Vehicle> availableVehicles, int toFill)
 	{
 		ArrayList<Subway> allSubways = new ArrayList<>();
 		
 		for (Vehicle vehicle : availableVehicles)
 			allSubways.add((Subway)vehicle);
 		
-		return Vehicle.assembleFleet(getAvailable(allSubways), toFill);
+		return super.assembleFleet(getAvailable(allSubways), toFill);
 	}
 	
 	public static ArrayList<Vehicle> getAvailable(ArrayList<Subway> allSubways)
