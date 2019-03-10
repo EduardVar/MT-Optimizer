@@ -7,6 +7,8 @@
 
 public final class Passenger
 {
+	private static String globalDate = "NONE";
+	
 	private String ID;
 	
 	private char modality;
@@ -17,7 +19,8 @@ public final class Passenger
 	
 	public Passenger(String item0, String item1, String item2, String item3,
 			String item4) throws IDFormatException, AgeFormatException,
-			ModalityFormatException, HourOutOfRangeException
+			ModalityFormatException, HourOutOfRangeException, 
+			InvalidDateException
 	
 	{
 		String ID = item0;
@@ -39,6 +42,12 @@ public final class Passenger
 					
 		if (hour < 1 || hour > 24)
 			throw new HourOutOfRangeException(item3);
+		
+		if (globalDate.equals("NONE"))
+			globalDate = date;
+		else
+			if (!(date.equals(globalDate)))
+				throw new InvalidDateException(date);
 		
 		this.ID = ID;
 		this.modality = modality;

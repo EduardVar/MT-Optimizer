@@ -1,0 +1,20 @@
+InvalidDateException: For input string: "2BC9B304"
+On line: 6750708,G,S,7,2BC9B304
+
+IDFormatException: For input string: ""
+On line: ,D,A,7,20190304
+
+java.lang.NumberFormatException: For input string: "D"
+On line: 6165954,C,A,D,20190304
+
+java.lang.ArrayIndexOutOfBoundsException: 4
+On line: S,A,15,20190304
+
+AgeFormatException: For input string: "X"
+On line: 9393317,X,X,16,20190304
+
+ModalityFormatException: For input string: "N"
+On line: 8562792,N,C,17,20190304
+
+java.lang.ArrayIndexOutOfBoundsException: 4
+On line: 318DE758,SA,2B,2019X304

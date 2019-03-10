@@ -35,15 +35,14 @@ public class MTOptimizer
 	
 	private static ArrayList<Passenger> passengers = new ArrayList<>();
 	
-	private static String date = "20190304";
-	
 	public static void readInFile(String pathname) throws IOException
 	{
 		File file = new File(pathname);
 		
 		BufferedReader br = new BufferedReader(new FileReader(file));
 		
-		String line = "";
+		String line = "";	
+		String errorContent = "";
 		
 		while ((line = br.readLine()) != null)
 		{
@@ -69,34 +68,37 @@ public class MTOptimizer
 				goBuses.add(new GoBus(content[0], content[1], content[2]));
 				break;
 			case "ridership.txt":
-				addRider(line);
+				errorContent = addRider(line, errorContent);
 				break;
 			}
 		}
 		
 		br.close();
+		
+		writeToFile("errorlog.txt", errorContent);
 	}
 	
-	public static void addRider(String line)
+	public static String addRider(String line, String errorContent)
 	{
 		String[] content = line.split(",");
 		
 		try
 		{
-			if (!(content[4].equals(date)))
-				System.out.println("AHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHh\n" +line);
-			
-			
 			passengers.add(new Passenger(content[0], content[1], content[2],
 					content[3], content[4]));
 		}
 		catch (NumberFormatException | ArrayIndexOutOfBoundsException |
 				IDFormatException | AgeFormatException | 
-				ModalityFormatException | HourOutOfRangeException e) 
+				ModalityFormatException | HourOutOfRangeException | 
+				InvalidDateException e) 
 		{
-			System.out.println(e + " [CAUGHT]");
-			System.out.println(line);
+			if (!(errorContent.equals("")))				
+				errorContent += "\r\n";
+			
+			errorContent +=  e + "\r\nOn line: " + line + "\r\n";
 		}
+		
+		return errorContent;
 	}
 	
 	//Fix this up or just replace it lol
