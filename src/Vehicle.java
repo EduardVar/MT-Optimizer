@@ -8,7 +8,7 @@
 import java.util.ArrayList;
 import java.util.Random;
 
-public abstract class Vehicle implements Drivables
+public abstract class Vehicle
 {
 	private static Random random = new Random();
 	

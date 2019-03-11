@@ -1,7 +1,7 @@
 /**
  * Author:	Eduard Varshavsky
  * NetID:	18ev
- * Date:	February 21, 2019
+ * Date:	March 11, 2019
  * Desc:	
  */
 
@@ -22,15 +22,10 @@ public class MTOptimizer
 	private static ArrayList<Bus> buses = new ArrayList<>();
 	private static ArrayList<GoBus> goBuses = new ArrayList<>();
 	
-//	@SuppressWarnings("unchecked")
-//	//REPLACES VEHICLES With an interface potentially?
-//	private static ArrayList<Vehicle>[] vehicles = 
-//			(ArrayList<Vehicle>[])new ArrayList[]
-//			{subways, goTrains, streetCars, buses, goBuses};
-	
 	@SuppressWarnings("unchecked")
-	private static ArrayList<Drivables>[] vehicles = 
-			(ArrayList<Drivables>[])new ArrayList[]
+	//All vehicle types inherit from Vehicle class so array of Vehicle objects
+	private static ArrayList<Vehicle>[] vehicles = 
+			(ArrayList<Vehicle>[])new ArrayList[]
 			{subways, goTrains, streetCars, buses, goBuses};
 	
 	private static ArrayList<Passenger> passengers = new ArrayList<>();
@@ -46,6 +41,7 @@ public class MTOptimizer
 		
 		while ((line = br.readLine()) != null)
 		{
+			//System.out.println(line);
 			String[] content = line.split(",");
 			
 			switch (pathname)
@@ -90,7 +86,7 @@ public class MTOptimizer
 		catch (NumberFormatException | ArrayIndexOutOfBoundsException |
 				IDFormatException | AgeFormatException | 
 				ModalityFormatException | HourOutOfRangeException | 
-				InvalidDateException e) 
+				InvalidDateException e)
 		{
 			if (!(errorContent.equals("")))				
 				errorContent += "\r\n";
