@@ -1,3 +1,5 @@
+import java.util.Map;
+
 /**
  * Author:	Eduard Varshavsky
  * NetID:	18ev
@@ -80,6 +82,16 @@ public final class Passenger
 			size = SENIOR_SIZE;
 			break;
 		}
+	}
+	
+	public void addToInfo(Map<Integer, Map<Character, Float>>allInfo)
+	{
+		Map<Character, Float> inner = allInfo.get(hour);	
+		
+		float newSize = inner.get(modality) + size;
+		
+		inner.put(modality, newSize);		
+		allInfo.put(hour, inner);
 	}
 
 	@Override

@@ -107,17 +107,7 @@ public class MTOptimizer
 		initialSet(allInfo);
 		
 		for (Passenger passenger : passengers)
-		{
-			int hour = passenger.getHour();
-			char modality = passenger.getModality();
-			Map<Character, Float> inner = allInfo.get(hour);	
-			
-			float newCapacity = inner.get(modality);
-			newCapacity += passenger.getSize();
-			
-			inner.put(modality, newCapacity);		
-			allInfo.put(hour, inner);
-		}
+			passenger.addToInfo(allInfo);
 		
 		System.out.println(allInfo);
 		
