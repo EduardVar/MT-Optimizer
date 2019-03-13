@@ -38,8 +38,9 @@ public final class Passenger
 		this.date = item4;
 		
 		checkForExceptions(item0, item1, item2, item3, item4);
+		setPassengerSize();
 	}
-	
+
 	public void checkForExceptions(String item0, String item1, String item2,
 			String item3, String item4) throws IDFormatException, 
 			AgeFormatException, ModalityFormatException, HourOutOfRangeException, 
@@ -86,5 +87,20 @@ public final class Passenger
 	{
 		return "Person [ID=" + ID + ", modality=" + modality + ", ageGroup=" +
 				ageGroup + ", hour=" + hour + ", date=" + date + "]";
+	}
+	
+	public int getHour()
+	{
+		return hour;
+	}
+
+	public char getModality()
+	{
+		return modality;
+	}
+
+	public float getSize()
+	{
+		return size;
 	}
 }

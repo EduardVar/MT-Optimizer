@@ -13,6 +13,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MTOptimizer
 {
@@ -97,7 +99,47 @@ public class MTOptimizer
 		return errorContent;
 	}
 	
-	//Fix this up or just replace it lol
+	public static String getInOperations()
+	{
+		String content = "";
+		
+		Map<Integer, Map<Character, Float>>allInfo = new HashMap<>();	
+		initialSet(allInfo);
+		
+		for (Passenger passenger : passengers)
+		{
+			int hour = passenger.getHour();
+			char modality = passenger.getModality();
+			Map<Character, Float> inner = allInfo.get(hour);	
+			
+			float newCapacity = inner.get(modality);
+			newCapacity += passenger.getSize();
+			
+			inner.put(modality, newCapacity);		
+			allInfo.put(hour, inner);
+		}
+		
+		System.out.println(allInfo);
+		
+		return content;
+	}
+	
+	public static void initialSet(Map<Integer, Map<Character, Float>>allInfo)
+	{
+		for (int hour = 1; hour < 25; hour++)
+		{
+			Map<Character, Float> inner = new HashMap<>();
+			inner.put('S', 0f);
+			inner.put('G', 0f);
+			inner.put('X', 0f);
+			inner.put('C', 0f);
+			inner.put('D', 0f);
+			
+			allInfo.put(hour, inner);
+		}
+	}
+	
+	//It is being used to write error and should be used to write the final 
 	public static void writeToFile(String fileName, String content) 
 			throws IOException
 	{
@@ -125,6 +167,8 @@ public class MTOptimizer
 		
 		for (String name: fileNames)
 			readInFile(name);
+		
+		getInOperations();
 		
 		System.out.println(vehicles); //del later
 		
