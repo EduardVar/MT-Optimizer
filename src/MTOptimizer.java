@@ -111,6 +111,10 @@ public class MTOptimizer
 		
 		System.out.println(allInfo);
 		
+		Map<Integer, Map<Character, ArrayList<Vehicle>>> todayFleet = getFleets(allInfo);
+		
+		System.out.println(todayFleet);
+		
 		return content;
 	}
 	
@@ -127,6 +131,39 @@ public class MTOptimizer
 			
 			allInfo.put(hour, inner);
 		}
+	}
+	
+	public static Map<Integer, Map<Character, ArrayList<Vehicle>>> getFleets(Map<Integer, Map<Character, Float>>allInfo)
+	{
+		Map<Character, ArrayList<Vehicle>> vehicleDic = new HashMap<>();
+		vehicleDic.put('S', vehicles[0]);
+		vehicleDic.put('G', vehicles[1]);
+		vehicleDic.put('X', vehicles[2]);
+		vehicleDic.put('C', vehicles[3]);
+		vehicleDic.put('D', vehicles[4]);
+		
+		Map<Integer, Map<Character, ArrayList<Vehicle>>> fleetInfo = new HashMap<>();
+		
+		for (int hour = 1; hour < 25; hour++)
+		{
+			Map<Character, Float> allInner = allInfo.get(hour);
+			
+			Map<Character, ArrayList<Vehicle>> fleetInner = new HashMap<>();
+			
+			for (char key : allInner.keySet())
+			{
+				ArrayList<Vehicle> allAvailable = vehicleDic.get(key);
+				
+				Vehicle sample = allAvailable.get(0);
+				float toFill = allInner.get(key);
+				
+				fleetInner.put(key, sample.assembleFleet(allAvailable, toFill));
+			}
+			
+			fleetInfo.put(hour, fleetInner);
+		}
+		
+		return fleetInfo;
 	}
 	
 	//It is being used to write error and should be used to write the final 

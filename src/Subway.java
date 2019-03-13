@@ -31,8 +31,8 @@ public final class Subway extends Vehicle
 		return (Integer.parseInt(numCars) * Integer.parseInt(perCar)) + "";
 	}
 	
-	
-	public ArrayList<Vehicle> assembleFleet(ArrayList<Vehicle> availableVehicles, int toFill)
+	@Override
+	public ArrayList<Vehicle> assembleFleet(ArrayList<Vehicle> availableVehicles, float toFill)
 	{
 		ArrayList<Subway> allSubways = new ArrayList<>();
 		

@@ -48,20 +48,27 @@ public abstract class Vehicle
 		return capacity;
 	}
 	
-	public ArrayList<Vehicle> assembleFleet(ArrayList<Vehicle> availableVehicles, int toFill)
+	public ArrayList<Vehicle> assembleFleet(ArrayList<Vehicle> availableVehicles, float toFill)
 	{
-		int leftToFill = toFill;
+		float leftToFill = toFill;
+		
+		ArrayList<Vehicle> tempAvailable = new ArrayList<>();
+		
+		for (Vehicle vehicle : availableVehicles)
+			tempAvailable.add(vehicle);
 		
 		ArrayList<Vehicle> fleet = new ArrayList<>();
 		
 		//Randomly choose
 		while (leftToFill > 0)
-		{
-			Vehicle toAdd = availableVehicles.get(generateNumber(0, availableVehicles.size()));
+		{	
+			Vehicle toAdd = tempAvailable.get(generateNumber(0, tempAvailable.size()));
 			
 			leftToFill -= toAdd.getCapacity();
 			
-			availableVehicles.remove(toAdd);
+			tempAvailable.remove(toAdd);
+			
+			fleet.add(toAdd);
 		}
 		
 		return fleet;

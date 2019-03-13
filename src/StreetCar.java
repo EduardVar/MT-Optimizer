@@ -11,7 +11,7 @@ public final class StreetCar extends Vehicle
 	
 	private static String TYPE_SINGLE = "S";
 	private static String TYPE_DOUBLE = "D";
-	private static int SECTION_SIZE = 20;
+	private static int SECTION_SIZE = 40;
 
 	public StreetCar(String unitNumber, String idNumber, String type)
 	{
