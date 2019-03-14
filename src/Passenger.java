@@ -48,7 +48,7 @@ public final class Passenger
 			AgeFormatException, ModalityFormatException, HourOutOfRangeException, 
 			InvalidDateException
 	{
-		if (!(ID.length() == 7 || ID.length() == 14 || ID.equals("*")))
+		if (!(ID.length() == 7 || (ID.length() == 16 && ID.charAt(0) == 'T') || ID.equals("*")))
 			throw new IDFormatException(item0);
 		
 		if (!(modality == 'S' || modality == 'G' || modality == 'X' ||

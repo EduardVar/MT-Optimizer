@@ -65,7 +65,7 @@ public class MTOptimizer
 			case "gobuses.txt":
 				goBuses.add(new GoBus(content[0], content[1], content[2]));
 				break;
-			case "ridership.txt":
+			case "ridership - OLD.txt":
 				errorContent = addRider(line, errorContent);
 				break;
 			}
@@ -190,7 +190,7 @@ public class MTOptimizer
 	public static void main(String[] args) throws IOException
 	{
 		String[] fileNames = {"subways.txt", "gotrains.txt", "streetcars.txt",
-				"buses.txt", "gobuses.txt", "ridership.txt"};
+				"buses.txt", "gobuses.txt", "ridership - OLD.txt"};
 		
 		for (String name: fileNames)
 			readInFile(name);

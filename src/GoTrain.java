@@ -12,10 +12,10 @@ public final class GoTrain extends Vehicle
 		super(unitNumber, idNumber, capacity);
 	}
 
-	@Override
-	public String toString()
-	{
-		return "GoTrain [unitNumber=" + unitNumber + ", idNumber=" + idNumber +
-				", capacity=" + capacity + "]";
-	}
+//	@Override
+//	public String toString()
+//	{
+//		return "GoTrain [unitNumber=" + unitNumber + ", idNumber=" + idNumber +
+//				", capacity=" + capacity + "]";
+//	}
 }

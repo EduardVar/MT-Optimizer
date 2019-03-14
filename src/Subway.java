@@ -54,15 +54,15 @@ public final class Subway extends Vehicle
 		return available;
 	}
 
-	@Override
-	public String toString()
-	{
-		return "Subway [numOfCars=" + numOfCars + ", passPerCar=" +
-				passPerCar + ", operationalStatus=" + operationalStatus +
-				", operationalDate=" + operationalDate + ", unitNumber=" +
-				unitNumber + ", idNumber=" + idNumber + ", capacity=" +
-				capacity + "]";
-	}
+//	@Override
+//	public String toString()
+//	{
+//		return "Subway [numOfCars=" + numOfCars + ", passPerCar=" +
+//				passPerCar + ", operationalStatus=" + operationalStatus +
+//				", operationalDate=" + operationalDate + ", unitNumber=" +
+//				unitNumber + ", idNumber=" + idNumber + ", capacity=" +
+//				capacity + "]";
+//	}
 
 	public char getOperationalStatus()
 	{

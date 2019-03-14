@@ -12,10 +12,10 @@ public final class GoBus extends Bus
 		super(unitNumber, idNumber, capacity);
 	}
 
-	@Override
-	public String toString()
-	{
-		return "GoBus [unitNumber=" + unitNumber + ", idNumber=" + idNumber +
-				", capacity=" + capacity + "]";
-	}
+//	@Override
+//	public String toString()
+//	{
+//		return "GoBus [unitNumber=" + unitNumber + ", idNumber=" + idNumber +
+//				", capacity=" + capacity + "]";
+//	}
 }

@@ -29,10 +29,10 @@ public final class StreetCar extends Vehicle
 			return "-1";
 	}
 
-	@Override
-	public String toString()
-	{
-		return "StreetCar [type=" + type + ", unitNumber=" + unitNumber +
-				", idNumber=" + idNumber + ", capacity=" + capacity + "]";
-	}
+//	@Override
+//	public String toString()
+//	{
+//		return "StreetCar [type=" + type + ", unitNumber=" + unitNumber +
+//				", idNumber=" + idNumber + ", capacity=" + capacity + "]";
+//	}
 }

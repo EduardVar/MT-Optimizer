@@ -34,7 +34,7 @@ public abstract class Vehicle
 	@Override
 	public String toString()
 	{
-		return "Vehicle [unitNumber=" + unitNumber + ", idNumber=" + idNumber + ", capacity=" + capacity + "]";
+		return this.getClass() + " Unit# = " + unitNumber + ", ID = " + idNumber + ", Capacity = " + capacity;
 	}
 	
 	//Non inclusive
@@ -50,6 +50,9 @@ public abstract class Vehicle
 	
 	public ArrayList<Vehicle> assembleFleet(ArrayList<Vehicle> availableVehicles, float toFill)
 	{
+		//NEED TO IMPLEMENT TRUE OPTIMIZATION ALGORITHM
+		//He keeps changing the specifications ;_;
+		
 		float leftToFill = toFill;
 		
 		ArrayList<Vehicle> tempAvailable = new ArrayList<>();
@@ -59,16 +62,28 @@ public abstract class Vehicle
 		
 		ArrayList<Vehicle> fleet = new ArrayList<>();
 		
-		//Randomly choose
+		System.out.println("NEW FLEET");
+		
 		while (leftToFill > 0)
-		{	
-			Vehicle toAdd = tempAvailable.get(generateNumber(0, tempAvailable.size()));
+		{
+			System.out.println("To fill: " + toFill);
 			
-			leftToFill -= toAdd.getCapacity();
+			Vehicle best = tempAvailable.get(0);
 			
-			tempAvailable.remove(toAdd);
+			for (Vehicle curr : tempAvailable)
+			{
+				float bestSize = best.getCapacity();
+				float currSize = curr.getCapacity();
+				
+				if (currSize >= toFill && currSize < bestSize)
+					best = curr;
+				else if (bestSize < toFill && currSize > bestSize)
+					best = curr;
+			}
 			
-			fleet.add(toAdd);
+			fleet.add(best);
+			leftToFill -= best.getCapacity();
+			tempAvailable.remove(best);
 		}
 		
 		return fleet;

@@ -13,10 +13,10 @@ public class Bus extends Vehicle
 		super(unitNumber, idNumber, capacity);
 	}
 
-	@Override
-	public String toString()
-	{
-		return "Bus [unitNumber=" + unitNumber + ", idNumber=" + idNumber +
-				", capacity=" + capacity + "]";
-	}
+//	@Override
+//	public String toString()
+//	{
+//		return "Bus [unitNumber=" + unitNumber + ", idNumber=" + idNumber +
+//				", capacity=" + capacity + "]";
+//	}
 }
