@@ -30,23 +30,6 @@ public abstract class Vehicle
 		idNumber = "~NONE~";
 		capacity = -1;
 	}
-
-	@Override
-	public String toString()
-	{
-		return this.getClass() + " Unit# = " + unitNumber + ", ID = " + idNumber + ", Capacity = " + capacity;
-	}
-	
-	//Non inclusive
-	public static int generateNumber(int low, int high)
-	{
-		return random.nextInt(high - low) + low;
-	}
-
-	public int getCapacity()
-	{
-		return capacity;
-	}
 	
 	public ArrayList<Vehicle> assembleFleet(ArrayList<Vehicle> availableVehicles, float toFill)
 	{
@@ -62,12 +45,9 @@ public abstract class Vehicle
 		
 		ArrayList<Vehicle> fleet = new ArrayList<>();
 		
-		System.out.println("NEW FLEET");
-		
+		//Optimization algorithm
 		while (leftToFill > 0)
 		{
-			System.out.println("To fill: " + toFill);
-			
 			Vehicle best = tempAvailable.get(0);
 			
 			for (Vehicle curr : tempAvailable)
@@ -87,5 +67,22 @@ public abstract class Vehicle
 		}
 		
 		return fleet;
+	}
+	
+	@Override
+	public String toString()
+	{
+		return this.getClass() + ", Unit#=" + unitNumber + ", ID=" + idNumber + ", Capacity=" + capacity;
+	}
+	
+	//Non inclusive
+	public static int generateNumber(int low, int high)
+	{
+		return random.nextInt(high - low) + low;
+	}
+
+	public int getCapacity()
+	{
+		return capacity;
 	}
 }
