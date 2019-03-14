@@ -72,7 +72,9 @@ public abstract class Vehicle
 	@Override
 	public String toString()
 	{
-		return this.getClass() + ", Unit#=" + unitNumber + ", ID=" + idNumber + ", Capacity=" + capacity;
+		String toReturn = this.getClass() + ": Unit#=" + unitNumber + ", ID=" + idNumber + ", Capacity=" + capacity;
+		
+		return toReturn.substring(6);
 	}
 	
 	//Non inclusive
