@@ -57,9 +57,7 @@ public final class Subway extends Vehicle
 	@Override
 	public String toString()
 	{
-		return super.toString() + ", #Cars=" + numOfCars + ", #PerCar=" + 
-				passPerCar + ", OperationStatus=" + operationalStatus + 
-				", OperationDate=" + operationalDate;
+		return this.getUnitNumber() + "," + this.getIdNumber() + "," + numOfCars + "," + passPerCar + "," + operationalStatus + "," + operationalDate;
 	}
 
 	public char getOperationalStatus()

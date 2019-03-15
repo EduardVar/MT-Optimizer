@@ -65,7 +65,7 @@ public class MTOptimizer
 			case "gobuses.txt":
 				goBuses.add(new GoBus(content[0], content[1], content[2]));
 				break;
-			case "ridership - OLD.txt":
+			case "ridership.txt":
 				errorContent = addRider(line, errorContent);
 				break;
 			}
@@ -99,23 +99,17 @@ public class MTOptimizer
 		return errorContent;
 	}
 	
-	public static void getInOperations()
+	public static void getInOperations() throws IOException
 	{
-		String content = "";
-		
 		Map<Integer, Map<Character, Float>>allInfo = new HashMap<>();	
 		initialSet(allInfo);
 		
 		for (Passenger passenger : passengers)
 			passenger.addToInfo(allInfo);
 		
-		System.out.println(allInfo);
-		
 		Map<Integer, Map<Character, ArrayList<Vehicle>>> todayFleet = getFleets(allInfo);
-		
-		System.out.println(todayFleet);
-		
-		System.out.println(formatOperations(todayFleet));
+
+		writeToFile("InOperationFleets.txt", formatOperations(todayFleet));
 	}
 	
 	public static void initialSet(Map<Integer, Map<Character, Float>>allInfo)
@@ -184,11 +178,22 @@ public class MTOptimizer
 			
 			for (int hour = 1; hour < 25; hour++)
 			{
-				String start = String.format("[Hour = %1$02d]", hour);
-				content += start + "\r\n";
+				content += String.format("[Hour = %1$02d]\r\n", hour);
+				
+				Map<Character, ArrayList<Vehicle>> hourInner = todayFleet.get(hour);
+				ArrayList<Vehicle> sectionFleet = hourInner.get(indexDic.get(section));
+				
+				for (Vehicle vehicle : sectionFleet)
+					content += vehicle.toString() + "\r\n";
+				
+				content += String.format("[Count = %1$02d]", sectionFleet.size());
+				
+				if (!(hour == 24 && section.equals(sections[4])))
+					content += "\r\n";
 			}
 			
-			content += "\r\n";
+			if (!(section.equals(sections[4])))
+				content += "\r\n";
 		}
 		
 		return content;
@@ -218,18 +223,11 @@ public class MTOptimizer
 	public static void main(String[] args) throws IOException
 	{
 		String[] fileNames = {"subways.txt", "gotrains.txt", "streetcars.txt",
-				"buses.txt", "gobuses.txt", "ridership - OLD.txt"};
+				"buses.txt", "gobuses.txt", "ridership.txt"};
 		
 		for (String name: fileNames)
 			readInFile(name);
 		
 		getInOperations();
-		
-		System.out.println(vehicles); //del later
-		
-		
-//		for (ArrayList<Vehicle> vehicleList : vehicles)
-//			for (Vehicle vehicle : vehicleList)
-//				System.out.println(vehicle);
 	}
 }

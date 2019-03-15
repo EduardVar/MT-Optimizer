@@ -13,9 +13,9 @@ public abstract class Vehicle
 	private static Random random = new Random();
 	
 	//CHANGE TO PRIVATE LATER AND USE GETTER/SETTERS INSTEAD
-	protected int unitNumber;
-	protected String idNumber;
-	protected int capacity;
+	private int unitNumber;
+	private String idNumber;
+	private int capacity;
 	
 	protected Vehicle(String unitNumber, String idNumber, String capacity)
 	{
@@ -72,7 +72,7 @@ public abstract class Vehicle
 	@Override
 	public String toString()
 	{
-		String toReturn = this.getClass() + ": Unit#=" + unitNumber + ", ID=" + idNumber + ", Capacity=" + capacity;
+		String toReturn = this.getClass() + ": " + unitNumber + "," + idNumber + "," + capacity;
 		
 		return toReturn.substring(6);
 	}
@@ -81,6 +81,16 @@ public abstract class Vehicle
 	public static int generateNumber(int low, int high)
 	{
 		return random.nextInt(high - low) + low;
+	}
+
+	public int getUnitNumber()
+	{
+		return unitNumber;
+	}
+
+	public String getIdNumber()
+	{
+		return idNumber;
 	}
 
 	public int getCapacity()
