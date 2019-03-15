@@ -99,7 +99,7 @@ public class MTOptimizer
 		return errorContent;
 	}
 	
-	public static String getInOperations()
+	public static void getInOperations()
 	{
 		String content = "";
 		
@@ -115,7 +115,7 @@ public class MTOptimizer
 		
 		System.out.println(todayFleet);
 		
-		return content;
+		System.out.println(formatOperations(todayFleet));
 	}
 	
 	public static void initialSet(Map<Integer, Map<Character, Float>>allInfo)
@@ -164,6 +164,34 @@ public class MTOptimizer
 		}
 		
 		return fleetInfo;
+	}
+	
+	public static String formatOperations(Map<Integer, Map<Character, ArrayList<Vehicle>>> todayFleet)
+	{
+		String content = "";
+		String[] sections = {"[Trains]", "[GoTrains]", "[Streetcars]", "[Buses]", "[GoBuses]"};
+		
+		Map<String, Character> indexDic = new HashMap<>();
+		indexDic.put(sections[0], 'S');
+		indexDic.put(sections[1], 'G');
+		indexDic.put(sections[2], 'X');
+		indexDic.put(sections[3], 'C');
+		indexDic.put(sections[4], 'D');
+		
+		for (String section : sections)
+		{
+			content += section + "\r\n";
+			
+			for (int hour = 1; hour < 25; hour++)
+			{
+				String start = String.format("[Hour = %1$02d]", hour);
+				content += start + "\r\n";
+			}
+			
+			content += "\r\n";
+		}
+		
+		return content;
 	}
 	
 	//It is being used to write error and should be used to write the final 
