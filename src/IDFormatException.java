@@ -1,3 +1,9 @@
+/**
+ * Author:	Eduard Varshavsky
+ * NetID:	18ev
+ * Date:	March 15, 2019
+ * Desc:	
+ */
 
 public class IDFormatException extends Exception
 {
