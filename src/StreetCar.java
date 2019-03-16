@@ -32,6 +32,8 @@ public final class StreetCar extends Vehicle
 	@Override
 	public String toString()
 	{
-		return this.getUnitNumber() + "," + this.getIdNumber() + "," + type;
+		String toReturn = this.getClass() + ": " + this.getUnitNumber() + "," + this.getIdNumber() + "," + type;
+		
+		return toReturn.substring(6);
 	}
 }

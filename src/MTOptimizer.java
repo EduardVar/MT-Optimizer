@@ -1,7 +1,7 @@
 /**
  * Author:	Eduard Varshavsky
  * NetID:	18ev
- * Date:	March 11, 2019
+ * Date:	March 15, 2019
  * Desc:	
  */
 
@@ -199,7 +199,12 @@ public class MTOptimizer
 		return content;
 	}
 	
-	//It is being used to write error and should be used to write the final 
+	/**
+	 * This function is a general function to writing to a file
+	 * @param fileName is a String for the name of the file being written to
+	 * @param content is a String for what is to be written to the file
+	 * @throws IOException in case file wasn't found
+	 */
 	public static void writeToFile(String fileName, String content) 
 			throws IOException
 	{
