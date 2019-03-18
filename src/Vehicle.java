@@ -31,41 +31,58 @@ public abstract class Vehicle
 		capacity = -1;
 	}
 	
-	public ArrayList<Vehicle> assembleFleet(ArrayList<Vehicle> availableVehicles, float toFill)
+	public ArrayList<Vehicle> assembleFleet(
+			ArrayList<Vehicle> availableVehicles, float toFill)
 	{
-		//NEED TO IMPLEMENT TRUE OPTIMIZATION ALGORITHM
-		//He keeps changing the specifications ;_;
-		
+		//Stores a float for the space left to fill by the vehicles
 		float leftToFill = toFill;
 		
+		//Makes a new list to store available vehicles without overriding the
+		//original array when manipulating for optimization
 		ArrayList<Vehicle> tempAvailable = new ArrayList<>();
 		
+		//Makes a deep copy of the availableVehicles List
 		for (Vehicle vehicle : availableVehicles)
 			tempAvailable.add(vehicle);
 		
+		//New list to store the optimized Vehicle objects to serve current hour
 		ArrayList<Vehicle> fleet = new ArrayList<>();
 		
-		//Optimization algorithm
+		//Keeps looping until leftToFill is "filled" --> THIS IS THE ALGORITHM
 		while (leftToFill > 0)
 		{
+			//Store best Vehicle object for the current loop
 			Vehicle best = tempAvailable.get(0);
 			
+			//Iterates through each available vehicle left to optimize better
 			for (Vehicle curr : tempAvailable)
 			{
+				//Stores the capacity of the best and current Vehicle Objects
 				float bestSize = best.getCapacity();
 				float currSize = curr.getCapacity();
 				
+				//Checks if the current Vehicle stores less than the best but
+				//still exceeds toFill (this is to save on bigger vehicles
 				if (currSize >= toFill && currSize < bestSize)
+					//Sets the best Vehicle to the current Vehicle
 					best = curr;
 				else if (bestSize < toFill && currSize > bestSize)
+					//Sets the best Vehicle to the current Vehicle is the best
+					//Vehicle can't exceed toFill value but the current does
 					best = curr;
 			}
 			
+			//Adds the best Vehicle to the fleet
 			fleet.add(best);
+			
+			//Updates leftToFill by Deducting the capacity of the best vehicle
 			leftToFill -= best.getCapacity();
+			
+			//Removes the best Vehicle for current loop from available Vehicles
 			tempAvailable.remove(best);
 		}
 		
+		//Returns the fleet for this hour
 		return fleet;
 	}
 	
