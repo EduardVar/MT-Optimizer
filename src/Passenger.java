@@ -12,7 +12,7 @@ public final class Passenger
 {
 	//In industry, this would use a function to get the current date or the
 	//day all the transactions were made. (Use this for project purposes)
-	private static String globalDate = "NONE";
+	private static int globalDate = -1;
 	
 	//Sets float constants for size passenger takes up based on age
 	private static final float CHILD_SIZE = 0.75f;
@@ -29,8 +29,8 @@ public final class Passenger
 	//Integer to store the hour the passenger rode
 	private int hour;
 	
-	//String to store the date the passenger rode 
-	private String date;
+	//Integer to store the date the passenger rode 
+	private int date;
 	
 	//Stores the passenger's size as a float
 	private float size = 0;
@@ -54,22 +54,23 @@ public final class Passenger
 			AgeFormatException, HourOutOfRangeException, InvalidDateException
 	
 	{	
-		//Sets the ID to the String of item0
-		this.ID = item0;
-		
-		//Checks if the given string is the size of a character. If it isn't,
-		//sets the character as a ? to raise an exception later
-		this.modality = item1.length() == 1 ? item1.charAt(0) : '?';
-		this.ageGroup = item2.length() == 1 ? item2.charAt(0) : '?';
-		
-		//Sets the hour to the converted integer of String object item3
-		this.hour = Integer.parseInt(item3);
-		
-		//Sets the date to the String of item0
-		this.date = item4;
-		
 		//Checks for any exceptions in the input given with this function
-		checkForExceptions(item1, item2, item3);
+		validateInput(item0, item1, item2, item3, item4);
+		
+//		//Sets the ID to the String of item0
+//		ID = item0;
+//		
+//		//Checks if the given string is the size of a character. If it isn't,
+//		//sets the character as a ? to raise an exception later
+//		modality = item1.length() == 1 ? item1.charAt(0) : '?';
+//		ageGroup = item2.length() == 1 ? item2.charAt(0) : '?';
+//		
+//		//Sets the hour to the converted integer of String object item3
+//		hour = Integer.parseInt(item3);
+//		
+//		//Sets the date to the String of item0
+//		date = item4;
+		
 		
 		//Sets the size attribute of the passenger to the result of this method
 		size = setPassengerSize();
@@ -78,24 +79,35 @@ public final class Passenger
 	/**
 	 * This function is used to check for any exceptions in the data provided
 	 * during construction of the Passenger object
+	 * @param item0
 	 * @param item1 meant to store modality of the passenger. Should be a char
 	 * @param item2 meant to store the age of the passenger. Should be a char
 	 * @param item3 meant to store hour passenger rode. Should be an integer
+	 * @param item4
 	 * @throws IDFormatException if item0 as an ID is in an invalid form
 	 * @throws ModalityFormatException if item1 isn't valid modality character
 	 * @throws AgeFormatException if item2 isn't a valid age character
 	 * @throws HourOutOfRangeException if item3 isn't within the 24 range
 	 * @throws InvalidDateException if item4 as a date is in an invalid form
 	 */
-	public void checkForExceptions(String item1, String item2, String item3)
+	public void validateInput(String item0, String item1, String item2,
+			String item3, String item4)
 			throws IDFormatException, ModalityFormatException,
 			AgeFormatException, HourOutOfRangeException, InvalidDateException
 	{
+		//Sets the ID to the String of item0
+		ID = item0;
+		
 		//Checks if the ID matches the dimensions and requirements required
-		if (!(ID.length() == 7 || (ID.length() == 16 && ID.charAt(0) == 'T') ||
-				ID.equals("*")))
+		if (!((ID.length() == 16 && ID.charAt(0) == 'T') || ID.equals("*") ||
+				(ID.length() == 7 && checkIfInt(ID))))
 			//Throws specific exception using the invalid ID
-			throw new IDFormatException(ID);
+			throw new IDFormatException(item0);
+		
+		//Checks if the given string is the size of a character. If it isn't,
+		//sets the character as a ? to raise an exception later
+		modality = item1.length() == 1 ? item1.charAt(0) : '?';
+		ageGroup = item2.length() == 1 ? item2.charAt(0) : '?';
 		
 		//Checks if the modality matches dimensions and requirements required
 		if (!(modality == 'S' || modality == 'G' || modality == 'X' ||
@@ -107,22 +119,39 @@ public final class Passenger
 		if (!(ageGroup == 'C' || ageGroup == 'A' || ageGroup == 'S'))
 			//Throws specific exception using the invalid age format
 			throw new AgeFormatException(item2);
+		
+		hour = checkIfInt(item3) ? Integer.parseInt(item3) : -1;
 					
 		//Checks if hour falls within the 24 hour range
 		if (hour < 1 || hour > 24)
 			//Throws specific exception using the invalid hour value
 			throw new HourOutOfRangeException(item3);
 		
+		date = checkIfInt(item4) ? Integer.parseInt(item4) : -1;
+		
 		//In industry, this will check via records if the date matches records
-		if (globalDate.equals("NONE"))
+		if (globalDate == -1)
 			//For this program, set first date in ridership.txt as global date
 			globalDate = date;
 		else
 			//Checks if the date provided does not matches the global date
-			if (!(date.equals(globalDate)))
+			if (!(date == globalDate))
 				//Throws specific exception using the invalid date given
-				throw new InvalidDateException(date);
+				throw new InvalidDateException(item4);
 	}
+	
+	
+	public boolean checkIfInt(String toCheck)
+	{
+		try {
+			Integer.parseInt(toCheck);
+			return true;
+		}
+		catch (NumberFormatException e) {
+			return false;
+		}
+	}
+	
 	
 	/**
 	 * Provides a value for how much space the passenger takes up on a Vehicle

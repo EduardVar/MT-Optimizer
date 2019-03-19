@@ -18,6 +18,14 @@ import java.util.Map;
 
 public class MTOptimizer
 {
+	/*
+	 * WHAT TO FIX
+	 * - MORE DESCRIPTIVE DESCRIPTIONS FOR EXCEPTIONS
+	 * 		Ex: "missing value" or "looking for ... "
+	 * - Need 10 errors (only have 8 rn)
+	 * 		Convert Passenger ID and DATE to a int
+	 */
+	
 	private static ArrayList<Subway> subways = new ArrayList<>();
 	private static ArrayList<GoTrain> goTrains = new ArrayList<>();
 	private static ArrayList<StreetCar> streetCars = new ArrayList<>();
