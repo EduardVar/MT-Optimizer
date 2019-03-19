@@ -1,7 +1,7 @@
 /**
  * Author:	Eduard Varshavsky
  * NetID:	18ev
- * Date:	February 21, 2019
+ * Date:	March 19, 2019
  * Desc:	This class is used to store and calculate attributes of a passenger
  * 			Also used to catch any errors in input during instantiation.
  */
@@ -19,61 +19,98 @@ public final class Passenger
 	private static final float ADULT_SIZE = 1.0f;
 	private static final float SENIOR_SIZE = 1.25f;
 	
+	//String to store the passenger's identifications
 	private String ID;
 	
+	//Characters to store the modality and age group of passenger
 	private char modality;
 	private char ageGroup;
 	
+	//Integer to store the hour the passenger rode
 	private int hour;
+	
+	//String to store the date the passenger rode 
 	private String date;
 	
+	//Stores the passenger's size as a float
 	private float size = 0;
 	
 	/**
-	 * 
-	 * @param item0
-	 * @param item1
-	 * @param item2
-	 * @param item3
-	 * @param item4
-	 * @throws IDFormatException
-	 * @throws AgeFormatException
-	 * @throws ModalityFormatException
-	 * @throws HourOutOfRangeException
-	 * @throws InvalidDateException
+	 * This is the constructor for a Passenger object. Takes care of setting
+	 * attributes and checking for any exceptions in the given data
+	 * @param item0 meant to store the ID of the passenger. Remains a String
+	 * @param item1 meant to store modality of the passenger. Should be a char
+	 * @param item2 meant to store the age of the passenger. Should be a char
+	 * @param item3 meant to store hour passenger rode. Should be an integer
+	 * @param item4 meant to store the date passenger rode. Remains a String
+	 * @throws IDFormatException if item0 as an ID is in an invalid form
+	 * @throws ModalityFormatException if item1 isn't valid modality character
+	 * @throws AgeFormatException if item2 isn't a valid age character
+	 * @throws HourOutOfRangeException if item3 isn't within the 24 range
+	 * @throws InvalidDateException if item4 as a date is in an invalid form
 	 */
 	public Passenger(String item0, String item1, String item2, String item3,
-			String item4) throws IDFormatException, AgeFormatException,
-			ModalityFormatException, HourOutOfRangeException, 
-			InvalidDateException
+			String item4) throws IDFormatException, ModalityFormatException,
+			AgeFormatException, HourOutOfRangeException, InvalidDateException
 	
 	{	
+		//Sets the ID to the String of item0
 		this.ID = item0;
+		
+		//Checks if the given string is the size of a character. If it isn't,
+		//sets the character as a ? to raise an exception later
 		this.modality = item1.length() == 1 ? item1.charAt(0) : '?';
 		this.ageGroup = item2.length() == 1 ? item2.charAt(0) : '?';
+		
+		//Sets the hour to the converted integer of String object item3
 		this.hour = Integer.parseInt(item3);
+		
+		//Sets the date to the String of item0
 		this.date = item4;
 		
+		//Checks for any exceptions in the input given with this function
 		checkForExceptions(item1, item2, item3);
-		setPassengerSize();
+		
+		//Sets the size attribute of the passenger to the result of this method
+		size = setPassengerSize();
 	}
 
+	/**
+	 * This function is used to check for any exceptions in the data provided
+	 * during construction of the Passenger object
+	 * @param item1 meant to store modality of the passenger. Should be a char
+	 * @param item2 meant to store the age of the passenger. Should be a char
+	 * @param item3 meant to store hour passenger rode. Should be an integer
+	 * @throws IDFormatException if item0 as an ID is in an invalid form
+	 * @throws ModalityFormatException if item1 isn't valid modality character
+	 * @throws AgeFormatException if item2 isn't a valid age character
+	 * @throws HourOutOfRangeException if item3 isn't within the 24 range
+	 * @throws InvalidDateException if item4 as a date is in an invalid form
+	 */
 	public void checkForExceptions(String item1, String item2, String item3)
-			throws IDFormatException, AgeFormatException,
-			ModalityFormatException, HourOutOfRangeException, 
-			InvalidDateException
+			throws IDFormatException, ModalityFormatException,
+			AgeFormatException, HourOutOfRangeException, InvalidDateException
 	{
-		if (!(ID.length() == 7 || (ID.length() == 16 && ID.charAt(0) == 'T') || ID.equals("*")))
+		//Checks if the ID matches the dimensions and requirements required
+		if (!(ID.length() == 7 || (ID.length() == 16 && ID.charAt(0) == 'T') ||
+				ID.equals("*")))
+			//Throws specific exception using the invalid ID
 			throw new IDFormatException(ID);
 		
+		//Checks if the modality matches dimensions and requirements required
 		if (!(modality == 'S' || modality == 'G' || modality == 'X' ||
 				modality == 'C' || modality == 'D'))
+			//Throws specific exception using the invalid modality format
 			throw new ModalityFormatException(item1);
 		
+		//Checks if the age matches the dimensions and requirements required
 		if (!(ageGroup == 'C' || ageGroup == 'A' || ageGroup == 'S'))
+			//Throws specific exception using the invalid age format
 			throw new AgeFormatException(item2);
 					
+		//Checks if hour falls within the 24 hour range
 		if (hour < 1 || hour > 24)
+			//Throws specific exception using the invalid hour value
 			throw new HourOutOfRangeException(item3);
 		
 		//In industry, this will check via records if the date matches records
@@ -83,46 +120,78 @@ public final class Passenger
 		else
 			//Checks if the date provided does not matches the global date
 			if (!(date.equals(globalDate)))
-				//Throws invalid date exception to show the date is wrong
+				//Throws specific exception using the invalid date given
 				throw new InvalidDateException(date);
 	}
 	
-	public void setPassengerSize()
+	/**
+	 * Provides a value for how much space the passenger takes up on a Vehicle
+	 * @return float for how much space the passenger takes up
+	 * @throws AgeFormatException in case an age exception wasn't caught
+	 */
+	public float setPassengerSize() throws AgeFormatException
 	{
+		//Checks was character ageGroup is and returns appropriate size for it
 		switch (ageGroup)
 		{
 		case 'C':
-			size = CHILD_SIZE;
-			break;
+			//Returns float size value for a child
+			return CHILD_SIZE;
 		case 'A':
-			size = ADULT_SIZE;
-			break;
+			//Returns float size value for an adult
+			return ADULT_SIZE;
 		case 'S':
-			size = SENIOR_SIZE;
-			break;
+			//Returns float size value for a senior
+			return SENIOR_SIZE;
+		default:
+			//Throws this exception in case an age exception wasn't caught
+			throw new AgeFormatException();
 		}
 	}
 	
+	/**
+	 * This functions is used to update the total capacities in the Hash Map
+	 * allInfo, uses individual Passenger object size to add onto it
+	 * @param allInfo the map containing the required capacity to fill each
+	 * 				  subsection for each hour
+	 */
 	public void addToInfo(Map<Integer, Map<Character, Float>>allInfo)
 	{
+		//Stores Vehicle map of the capacities to-fill for passenger's hour
 		Map<Character, Float> inner = allInfo.get(hour);	
 		
+		//Adds passenger's size to modality to-fill of the passenger's modality
 		float newSize = inner.get(modality) + size;
 		
-		inner.put(modality, newSize);		
+		//Replaces overall size to-fill for passenger's modality with newSize
+		inner.put(modality, newSize);	
+		
+		//Places the updated map under the specific hour that it was modified
 		allInfo.put(hour, inner);
 	}
 	
+	/**
+	 * Getter used to access the hour attribute
+	 * @return integer of the hour the Passenger object rode
+	 */
 	public int getHour()
 	{
 		return hour;
 	}
 
+	/**
+	 * Getter used to access the modality attribute
+	 * @return String of the modality the Passenger object rode
+	 */
 	public char getModality()
 	{
 		return modality;
 	}
 
+	/**
+	 * Getter used to access the size attribute
+	 * @return integer of the size the Passenger object is
+	 */
 	public float getSize()
 	{
 		return size;
