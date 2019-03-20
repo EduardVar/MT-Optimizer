@@ -10,6 +10,8 @@ import java.util.Map;
 
 public final class Passenger
 {
+	// *** CLASS VARIABLES ***
+	
 	//In industry, this would use a function to get the current date or the
 	//day all the transactions were made. (Use this for project purposes)
 	private static int globalDate = -1;
@@ -61,9 +63,34 @@ public final class Passenger
 		size = setPassengerSize();
 	}
 
+	// *** OBJECT-BEHAVIOUR METHODS ***
+	
+	/**
+	 * This functions is used to update the total capacities in the Hash Map
+	 * allInfo, uses individual Passenger object size to add onto it
+	 * @param allInfo the map containing the required capacity to fill each
+	 * 				  subsection for each hour
+	 */
+	public void addToInfo(Map<Integer, Map<Character, Float>>allInfo)
+	{
+		//Stores Vehicle map of the capacities to-fill for passenger's hour
+		Map<Character, Float> inner = allInfo.get(hour);	
+		
+		//Adds passenger's size to modality to-fill of the passenger's modality
+		float newSize = inner.get(modality) + size;
+		
+		//Replaces overall size to-fill for passenger's modality with newSize
+		inner.put(modality, newSize);	
+		
+		//Places the updated map under the specific hour that it was modified
+		allInfo.put(hour, inner);
+	}
+	
+	// *** MUTATOR METHODS ***
+	
 	/**
 	 * This function is used to check for any exceptions in the data provided
-	 * during construction of the Passenger object
+	 * during construction of the Passenger object. Sets the data if valid.
 	 * @param item0 meant to store the ID of the passenger. Remains a String
 	 * @param item1 meant to store modality of the passenger. Should be a char
 	 * @param item2 meant to store the age of the passenger. Should be a char
@@ -175,26 +202,7 @@ public final class Passenger
 		}
 	}
 	
-	/**
-	 * This functions is used to update the total capacities in the Hash Map
-	 * allInfo, uses individual Passenger object size to add onto it
-	 * @param allInfo the map containing the required capacity to fill each
-	 * 				  subsection for each hour
-	 */
-	public void addToInfo(Map<Integer, Map<Character, Float>>allInfo)
-	{
-		//Stores Vehicle map of the capacities to-fill for passenger's hour
-		Map<Character, Float> inner = allInfo.get(hour);	
-		
-		//Adds passenger's size to modality to-fill of the passenger's modality
-		float newSize = inner.get(modality) + size;
-		
-		//Replaces overall size to-fill for passenger's modality with newSize
-		inner.put(modality, newSize);	
-		
-		//Places the updated map under the specific hour that it was modified
-		allInfo.put(hour, inner);
-	}
+	// *** ACCESSOR METHODS ***
 	
 	/**
 	 * Getter used to access the hour attribute
