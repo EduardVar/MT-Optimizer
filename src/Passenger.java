@@ -57,21 +57,6 @@ public final class Passenger
 		//Checks for any exceptions in the input given with this function
 		validateInput(item0, item1, item2, item3, item4);
 		
-//		//Sets the ID to the String of item0
-//		ID = item0;
-//		
-//		//Checks if the given string is the size of a character. If it isn't,
-//		//sets the character as a ? to raise an exception later
-//		modality = item1.length() == 1 ? item1.charAt(0) : '?';
-//		ageGroup = item2.length() == 1 ? item2.charAt(0) : '?';
-//		
-//		//Sets the hour to the converted integer of String object item3
-//		hour = Integer.parseInt(item3);
-//		
-//		//Sets the date to the String of item0
-//		date = item4;
-		
-		
 		//Sets the size attribute of the passenger to the result of this method
 		size = setPassengerSize();
 	}
@@ -79,11 +64,11 @@ public final class Passenger
 	/**
 	 * This function is used to check for any exceptions in the data provided
 	 * during construction of the Passenger object
-	 * @param item0
+	 * @param item0 meant to store the ID of the passenger. Remains a String
 	 * @param item1 meant to store modality of the passenger. Should be a char
 	 * @param item2 meant to store the age of the passenger. Should be a char
 	 * @param item3 meant to store hour passenger rode. Should be an integer
-	 * @param item4
+	 * @param item4 meant to store the date passenger rode. Remains a String
 	 * @throws IDFormatException if item0 as an ID is in an invalid form
 	 * @throws ModalityFormatException if item1 isn't valid modality character
 	 * @throws AgeFormatException if item2 isn't a valid age character
@@ -120,6 +105,8 @@ public final class Passenger
 			//Throws specific exception using the invalid age format
 			throw new AgeFormatException(item2);
 		
+		//Sets hour to -1 if it can't be converted to an int, otherwise parses
+		//item3 into hour as an integer
 		hour = checkIfInt(item3) ? Integer.parseInt(item3) : -1;
 					
 		//Checks if hour falls within the 24 hour range
@@ -127,6 +114,8 @@ public final class Passenger
 			//Throws specific exception using the invalid hour value
 			throw new HourOutOfRangeException(item3);
 		
+		//Sets date to -1 if it can't be converted to an int, otherwise parses
+		//item4 into date as an integer
 		date = checkIfInt(item4) ? Integer.parseInt(item4) : -1;
 		
 		//In industry, this will check via records if the date matches records
@@ -140,18 +129,26 @@ public final class Passenger
 				throw new InvalidDateException(item4);
 	}
 	
-	
+	/**
+	 * This function is used to check if a String can be parsed as an integer
+	 * @param toCheck is the String object to check if it's an integer
+	 * @return true if able to be parsed, otherwise returns false
+	 */
 	public boolean checkIfInt(String toCheck)
 	{
+		//Tries to parse toCheck as an integer
 		try {
+			//Parses toCheck with parseInt to an integer
 			Integer.parseInt(toCheck);
+			
+			//Returns true if code was successful
 			return true;
 		}
 		catch (NumberFormatException e) {
+			//Returns false if an error occurred while parsing the String
 			return false;
 		}
 	}
-	
 	
 	/**
 	 * Provides a value for how much space the passenger takes up on a Vehicle
