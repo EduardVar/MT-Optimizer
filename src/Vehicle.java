@@ -1,8 +1,9 @@
 /**
  * Author:	Eduard Varshavsky
  * NetID:	18ev
- * Date:	February 21, 2019
- * Desc:	
+ * Date:	March 19, 2019
+ * Desc:	This is an abstract class for Vehicle sub-types to inherit from.
+ * 			Contains general attributes and behaviors used by any vehicle.
  */
 
 import java.util.ArrayList;
@@ -10,27 +11,43 @@ import java.util.Random;
 
 public abstract class Vehicle
 {
+	//Creates a Random object called random with a default seed
 	private static Random random = new Random();
 	
-	//CHANGE TO PRIVATE LATER AND USE GETTER/SETTERS INSTEAD
+	//Stores the unit number of the Vehicle object as an integer
 	private int unitNumber;
+	
+	//Stores the identification number of the Vehicle object as a String
 	private String idNumber;
+	
+	//Stores the capacity of the Vehicle object as an integer
 	private int capacity;
 	
+	/**
+	 * Constructor used to initialize a new Vehicle object
+	 * @param unitNumber as a String object for the Vehicle's unit number
+	 * @param idNumber as a String object for the Vehicle's ID number
+	 * @param capacity as a String object for the Vehicle's carrying capacity
+	 */
 	protected Vehicle(String unitNumber, String idNumber, String capacity)
 	{
+		//Sets Vehicle object's unitNumber to the parsed String of same name
 		this.unitNumber = Integer.parseInt(unitNumber);
+		
+		//Sets Vehicle object's idNumber to the String given with same name
 		this.idNumber = idNumber;
+		
+		//Sets Vehicle object's capacity to the parsed String of same name
 		this.capacity = Integer.parseInt(capacity);
 	}
 	
-	protected Vehicle()
-	{
-		unitNumber = -1;
-		idNumber = "~NONE~";
-		capacity = -1;
-	}
-	
+	/**
+	 * Function used by an instance of Vehicle object to assemble an optimized
+	 * fleet of Vehicle objects (used to serve hourly passengers)
+	 * @param availableVehicles is ArrayList of available Vehicle objects
+	 * @param toFill is a float that represents the capacity required to fill
+	 * @return ArrayList of Vehicles with an optimized specific fleet for hour
+	 */
 	public ArrayList<Vehicle> assembleFleet(
 			ArrayList<Vehicle> availableVehicles, float toFill)
 	{
@@ -86,10 +103,16 @@ public abstract class Vehicle
 		return fleet;
 	}
 	
-	@Override
+	/**
+	 * Overridden method meant to convert the call for this Vehicle object as a
+	 * String to automatically replace it with a formatted String version of it
+	 */
 	public String toString()
 	{
-		String toReturn = this.getClass() + ": " + unitNumber + "," + idNumber + "," + capacity;
+		//Creates a new String containing the Vehicle object's class name and
+		//attributes separated by commas (similar to ridership.txt)
+		String toReturn = this.getClass() + ": " + unitNumber + "," + 
+				idNumber + "," + capacity;
 		
 		return toReturn.substring(6);
 	}
