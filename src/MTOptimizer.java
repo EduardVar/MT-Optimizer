@@ -90,13 +90,16 @@ public class MTOptimizer
 		
 		try
 		{
+			if (content.length != 5)
+				throw new InvalidFieldNumberException(line);
+			
 			passengers.add(new Passenger(content[0], content[1], content[2],
 					content[3], content[4]));
 		}
 		catch (NumberFormatException | ArrayIndexOutOfBoundsException |
 				IDFormatException | AgeFormatException | 
 				ModalityFormatException | HourOutOfRangeException | 
-				InvalidDateException e)
+				InvalidDateException | InvalidFieldNumberException e)
 		{
 			if (!(errorContent.equals("")))				
 				errorContent += "\r\n";
