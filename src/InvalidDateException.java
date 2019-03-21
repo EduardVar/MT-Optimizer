@@ -16,6 +16,6 @@ public class InvalidDateException extends Exception
 	
 	public InvalidDateException(String reason) 
 	{ 
-		super("For input string: \"" + reason + "\""); 
+		super("\"" + reason + "\" does not match numerical format \"yyyymmdd\"."); 
 	}
 }

@@ -1,32 +1,32 @@
-InvalidFieldNumberException: 4 parameters given. Looking for 5 parameters.
-On line: 318DE758,SA,2B,2019X304
+InvalidParameterNumberException: 4 parameters given. Looking for 5 parameters.
+On line 3898: "318DE758,SA,2B,2019X304"
 
-ModalityFormatException: For input string: "N"
-On line: 8562792,N,C,17,20190304
+InvalidModalityException: "N" does not match accepted characters "S", "G", "X", "C", or "D"
+On line 17647: "8562792,N,C,17,20190304"
 
-InvalidFieldNumberException: 6 parameters given. Looking for 5 parameters.
-On line: *,S,A,6,20190304,90304
+InvalidParameterNumberException: 6 parameters given. Looking for 5 parameters.
+On line 32130: "*,S,A,6,20190304,90304"
 
-InvalidDateException: For input string: "2BC9B304"
-On line: 6750708,G,S,7,2BC9B304
+InvalidDateException: "2BC9B304" does not match numerical format "yyyymmdd".
+On line 35455: "6750708,G,S,7,2BC9B304"
 
-ModalityFormatException: For input string: ""
-On line: T201903046226830,,A,10,20190304
+InvalidModalityException: "" does not match accepted characters "S", "G", "X", "C", or "D"
+On line 36522: "T201903046226830,,A,10,20190304"
 
-HourOutOfRangeException: D
-On line: 6165954,C,A,D,20190304
+InvalidHourException: "D" is not an integer.
+On line 41281: "6165954,C,A,D,20190304"
 
-IDFormatException: For input string: "956866X"
-On line: 956866X,X,A,19,20190304
+InvalidIdException: "956866X" does not match ID format "*", a unique 7 digit code, or "Tyyyymmddnnnnnnn".
+On line 42606: "956866X,X,A,19,20190304"
 
-InvalidFieldNumberException: 4 parameters given. Looking for 5 parameters.
-On line: S,A,15,20190304
+InvalidParameterNumberException: 4 parameters given. Looking for 5 parameters.
+On line 42914: "S,A,15,20190304"
 
-IDFormatException: For input string: ""
-On line: ,D,A,7,20190304
+InvalidIdException: "" does not match ID format "*", a unique 7 digit code, or "Tyyyymmddnnnnnnn".
+On line 46976: ",D,A,7,20190304"
 
-AgeFormatException: For input string: "X"
-On line: 9393317,X,X,16,20190304
+InvalidAgeException: "X" does not match accepted characters "A", "C", or "S".
+On line 52323: "9393317,X,X,16,20190304"
 
-IDFormatException: For input string: "247A267"
-On line: 247A267,C,A,1,20190304
+InvalidIdException: "247A267" does not match ID format "*", a unique 7 digit code, or "Tyyyymmddnnnnnnn".
+On line 58966: "247A267,C,A,1,20190304"

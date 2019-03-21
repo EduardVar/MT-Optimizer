@@ -45,15 +45,15 @@ public final class Passenger
 	 * @param item2 meant to store the age of the passenger. Should be a char
 	 * @param item3 meant to store hour passenger rode. Should be an integer
 	 * @param item4 meant to store the date passenger rode. Remains a String
-	 * @throws IDFormatException if item0 as an ID is in an invalid form
-	 * @throws ModalityFormatException if item1 isn't valid modality character
-	 * @throws AgeFormatException if item2 isn't a valid age character
-	 * @throws HourOutOfRangeException if item3 isn't within the 24 range
+	 * @throws InvalidIdException if item0 as an ID is in an invalid form
+	 * @throws InvalidModalityException if item1 isn't valid modality character
+	 * @throws InvalidAgeException if item2 isn't a valid age character
+	 * @throws InvalidHourException if item3 isn't within the 24 range
 	 * @throws InvalidDateException if item4 as a date is in an invalid form
 	 */
 	public Passenger(String item0, String item1, String item2, String item3,
-			String item4) throws IDFormatException, ModalityFormatException,
-			AgeFormatException, HourOutOfRangeException, InvalidDateException
+			String item4) throws InvalidIdException, InvalidModalityException,
+			InvalidAgeException, InvalidHourException, InvalidDateException
 	
 	{	
 		//Checks for any exceptions in the input given with this function
@@ -96,16 +96,16 @@ public final class Passenger
 	 * @param item2 meant to store the age of the passenger. Should be a char
 	 * @param item3 meant to store hour passenger rode. Should be an integer
 	 * @param item4 meant to store the date passenger rode. Remains a String
-	 * @throws IDFormatException if item0 as an ID is in an invalid form
-	 * @throws ModalityFormatException if item1 isn't valid modality character
-	 * @throws AgeFormatException if item2 isn't a valid age character
-	 * @throws HourOutOfRangeException if item3 isn't within the 24 range
+	 * @throws InvalidIdException if item0 as an ID is in an invalid form
+	 * @throws InvalidModalityException if item1 isn't valid modality character
+	 * @throws InvalidAgeException if item2 isn't a valid age character
+	 * @throws InvalidHourException if item3 isn't within the 24 range
 	 * @throws InvalidDateException if item4 as a date is in an invalid form
 	 */
 	public void validateInput(String item0, String item1, String item2,
 			String item3, String item4)
-			throws IDFormatException, ModalityFormatException,
-			AgeFormatException, HourOutOfRangeException, InvalidDateException
+			throws InvalidIdException, InvalidModalityException,
+			InvalidAgeException, InvalidHourException, InvalidDateException
 	{
 		//Sets the ID to the String of item0
 		ID = item0;
@@ -114,7 +114,7 @@ public final class Passenger
 		if (!((ID.length() == 16 && ID.charAt(0) == 'T') || ID.equals("*") ||
 				(ID.length() == 7 && checkIfInt(ID))))
 			//Throws specific exception using the invalid ID
-			throw new IDFormatException(item0);
+			throw new InvalidIdException(item0);
 		
 		//Checks if the given string is the size of a character. If it isn't,
 		//sets the character as a ? to raise an exception later
@@ -125,12 +125,12 @@ public final class Passenger
 		if (!(modality == 'S' || modality == 'G' || modality == 'X' ||
 				modality == 'C' || modality == 'D'))
 			//Throws specific exception using the invalid modality format
-			throw new ModalityFormatException(item1);
+			throw new InvalidModalityException(item1);
 		
 		//Checks if the age matches the dimensions and requirements required
 		if (!(ageGroup == 'C' || ageGroup == 'A' || ageGroup == 'S'))
 			//Throws specific exception using the invalid age format
-			throw new AgeFormatException(item2);
+			throw new InvalidAgeException(item2);
 		
 		//Sets hour to -1 if it can't be converted to an int, otherwise parses
 		//item3 into hour as an integer
@@ -139,7 +139,7 @@ public final class Passenger
 		//Checks if hour falls within the 24 hour range
 		if (hour < 1 || hour > 24)
 			//Throws specific exception using the invalid hour value
-			throw new HourOutOfRangeException(item3);
+			throw new InvalidHourException(item3);
 		
 		//Sets date to -1 if it can't be converted to an int, otherwise parses
 		//item4 into date as an integer
@@ -180,9 +180,9 @@ public final class Passenger
 	/**
 	 * Provides a value for how much space the passenger takes up on a Vehicle
 	 * @return float for how much space the passenger takes up
-	 * @throws AgeFormatException in case an age exception wasn't caught
+	 * @throws InvalidAgeException in case an age exception wasn't caught
 	 */
-	public float setPassengerSize() throws AgeFormatException
+	public float setPassengerSize() throws InvalidAgeException
 	{
 		//Checks was character ageGroup is and returns appropriate size for it
 		switch (ageGroup)
@@ -198,7 +198,7 @@ public final class Passenger
 			return SENIOR_SIZE;
 		default:
 			//Throws this exception in case an age exception wasn't caught
-			throw new AgeFormatException();
+			throw new InvalidAgeException();
 		}
 	}
 	

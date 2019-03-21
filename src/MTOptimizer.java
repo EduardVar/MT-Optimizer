@@ -18,14 +18,6 @@ import java.util.Map;
 
 public class MTOptimizer
 {
-	/*
-	 * WHAT TO FIX
-	 * - MORE DESCRIPTIVE DESCRIPTIONS FOR EXCEPTIONS
-	 * 		Ex: "missing value" or "looking for ... "
-	 * - Need 10 errors (only have 8 rn)
-	 * 		Convert Passenger ID and DATE to a int
-	 */
-	
 	private static ArrayList<Subway> subways = new ArrayList<>();
 	private static ArrayList<GoTrain> goTrains = new ArrayList<>();
 	private static ArrayList<StreetCar> streetCars = new ArrayList<>();
@@ -48,6 +40,8 @@ public class MTOptimizer
 		
 		String line = "";	
 		String errorContent = "";
+		
+		int riderCount = 0;
 		
 		while ((line = br.readLine()) != null)
 		{
@@ -74,7 +68,8 @@ public class MTOptimizer
 				goBuses.add(new GoBus(content[0], content[1], content[2]));
 				break;
 			case "ridership.txt":
-				errorContent = addRider(line, errorContent);
+				riderCount++;
+				errorContent = addRider(line, errorContent, riderCount);
 				break;
 			}
 		}
@@ -84,27 +79,28 @@ public class MTOptimizer
 		writeToFile("errorlog.txt", errorContent);
 	}
 	
-	public static String addRider(String line, String errorContent)
+	public static String addRider(String line, String errorContent, 
+			int riderCount)
 	{
 		String[] content = line.split(",");
 		
 		try
 		{
 			if (content.length != 5)
-				throw new InvalidFieldNumberException(line);
+				throw new InvalidParameterNumberException(line);
 			
 			passengers.add(new Passenger(content[0], content[1], content[2],
 					content[3], content[4]));
 		}
 		catch (NumberFormatException | ArrayIndexOutOfBoundsException |
-				IDFormatException | AgeFormatException | 
-				ModalityFormatException | HourOutOfRangeException | 
-				InvalidDateException | InvalidFieldNumberException e)
+				InvalidIdException | InvalidAgeException | 
+				InvalidModalityException | InvalidHourException | 
+				InvalidDateException | InvalidParameterNumberException e)
 		{
 			if (!(errorContent.equals("")))				
 				errorContent += "\r\n";
 			
-			errorContent +=  e + "\r\nOn line: " + line + "\r\n";
+			errorContent +=  e + "\r\nOn line " + riderCount + ": \"" + line + "\"\r\n";
 		}
 		
 		return errorContent;
