@@ -111,8 +111,8 @@ public abstract class Vehicle
 	{
 		//Creates a new String containing the Vehicle object's class name and
 		//attributes separated by commas (similar to ridership.txt)
-		String toReturn = this.getClass() + ": " + unitNumber + "," + 
-				idNumber + "," + capacity;
+		String toReturn = this.getClass().toString().toLowerCase() + ": " +
+				unitNumber + "," + idNumber + "," + capacity;
 		
 		return toReturn.substring(6);
 	}
