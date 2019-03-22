@@ -1,18 +1,16 @@
 /**
  * Author:	Eduard Varshavsky
  * NetID:	18ev
- * Date:	March 19, 2019
+ * Date:	March 22, 2019
  * Desc:	This is an abstract class for Vehicle sub-types to inherit from.
  * 			Contains general attributes and behaviors used by any vehicle.
  */
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public abstract class Vehicle
 {
-	//Creates a Random object called random with a default seed
-	private static Random random = new Random();
+	// *** CLASS VARIABLES ***
 	
 	//Stores the unit number of the Vehicle object as an integer
 	private int unitNumber;
@@ -22,6 +20,8 @@ public abstract class Vehicle
 	
 	//Stores the capacity of the Vehicle object as an integer
 	private int capacity;
+	
+	// *** CONSTRUCTOR METHODS ***
 	
 	/**
 	 * Constructor used to initialize a new Vehicle object
@@ -40,6 +40,8 @@ public abstract class Vehicle
 		//Sets Vehicle object's capacity to the parsed String of same name
 		this.capacity = Integer.parseInt(capacity);
 	}
+	
+	// *** OBJECT-BEHAVIOUR METHODS ***
 	
 	/**
 	 * Function used by an instance of Vehicle object to assemble an optimized
@@ -103,6 +105,10 @@ public abstract class Vehicle
 		return fleet;
 	}
 	
+	// *** MUTATOR METHODS ***
+	
+	// *** ACCESSOR METHODS ***
+	
 	/**
 	 * Overridden method meant to convert the call for this Vehicle object as a
 	 * String to automatically replace it with a formatted String version of it
@@ -114,25 +120,32 @@ public abstract class Vehicle
 		String toReturn = this.getClass().toString().toLowerCase() + ": " +
 				unitNumber + "," + idNumber + "," + capacity;
 		
+		//Returns toReturn cut so the first part where it says "class"
 		return toReturn.substring(6);
 	}
-	
-	//Non inclusive
-	public static int generateNumber(int low, int high)
-	{
-		return random.nextInt(high - low) + low;
-	}
 
+	/**
+	 * Getter used to access the Vehicle object's Unit Number attribute
+	 * @return integer of the Vehicle's unit number
+	 */
 	public int getUnitNumber()
 	{
 		return unitNumber;
 	}
 
+	/**
+	 * Getter used to access Vehicle object's identification number attribute
+	 * @return String of the Vehicle's ID number
+	 */
 	public String getIdNumber()
 	{
 		return idNumber;
 	}
 
+	/**
+	 * Getter used to access Vehicle object's capacity attribute
+	 * @return integer of the Vehicle's capacity
+	 */
 	public int getCapacity()
 	{
 		return capacity;

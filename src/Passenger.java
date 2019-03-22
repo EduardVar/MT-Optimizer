@@ -37,6 +37,8 @@ public final class Passenger
 	//Stores the passenger's size as a float
 	private float size = 0;
 	
+	// *** CONSTRUCTOR METHODS ***
+	
 	/**
 	 * This is the constructor for a Passenger object. Takes care of setting
 	 * attributes and checking for any exceptions in the given data
