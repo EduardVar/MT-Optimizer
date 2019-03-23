@@ -1,7 +1,7 @@
 /**
  * Author:	Eduard Varshavsky
  * NetID:	18ev
- * Date:	March 15, 2019
+ * Date:	March 22, 2019
  * Desc:	
  */
 
@@ -32,20 +32,19 @@ public class MTOptimizer
 	
 	private static ArrayList<Passenger> passengers = new ArrayList<>();
 	
+	private static int riderCount = 0;
+	private static String line = "";
+	
 	public static void readInFile(String pathname) throws IOException
 	{
 		File file = new File(pathname);
 		
 		BufferedReader br = new BufferedReader(new FileReader(file));
-		
-		String line = "";	
+
 		String errorContent = "";
-		
-		int riderCount = 0;
 		
 		while ((line = br.readLine()) != null)
 		{
-			//System.out.println(line);
 			String[] content = line.split(",");
 			
 			switch (pathname)
@@ -75,7 +74,7 @@ public class MTOptimizer
 		}
 		
 		br.close();
-		
+
 		writeToFile("errorlog.txt", errorContent);
 	}
 	
@@ -89,13 +88,22 @@ public class MTOptimizer
 			if (content.length != 5)
 				throw new InvalidParameterNumberException(line);
 			
-			passengers.add(new Passenger(content[0], content[1], content[2],
-					content[3], content[4]));
+			Passenger toAdd = new Passenger(content[0], content[1], content[2],
+					content[3], content[4]);
+			
+			String specificErrors = toAdd.getErrorLog();
+			
+			if ((specificErrors.equals("")))
+				passengers.add(toAdd);
+			else
+			{
+				if (!(errorContent.equals("")))				
+					errorContent += "\r\n";
+				
+				errorContent +=  specificErrors + "\r\n";
+			}
 		}
-		catch (NumberFormatException | ArrayIndexOutOfBoundsException |
-				InvalidIdException | InvalidAgeException | 
-				InvalidModalityException | InvalidHourException | 
-				InvalidDateException | InvalidParameterNumberException e)
+		catch (InvalidParameterNumberException e)
 		{
 			if (!(errorContent.equals("")))				
 				errorContent += "\r\n";
@@ -232,6 +240,16 @@ public class MTOptimizer
 		writer.close();
 	}
 	
+	public static int getRiderCount()
+	{
+		return riderCount;
+	}
+
+	public static String getLine()
+	{
+		return line;
+	}
+
 	public static void main(String[] args) throws IOException
 	{
 		String[] fileNames = {"subways.txt", "gotrains.txt", "streetcars.txt",
