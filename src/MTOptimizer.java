@@ -68,7 +68,7 @@ public class MTOptimizer
 				break;
 			case "ridership.txt":
 				riderCount++;
-				errorContent = addRider(line, errorContent, riderCount);
+				errorContent = addRider(line, errorContent);
 				break;
 			}
 		}
@@ -78,8 +78,7 @@ public class MTOptimizer
 		writeToFile("errorlog.txt", errorContent);
 	}
 	
-	public static String addRider(String line, String errorContent, 
-			int riderCount)
+	public static String addRider(String line, String errorContent)
 	{
 		String[] content = line.split(",");
 		

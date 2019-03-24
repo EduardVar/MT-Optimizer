@@ -37,7 +37,7 @@ public final class Passenger
 	//Stores the passenger's size as a float
 	private float size = 0;
 
-	
+	//Stores String of any errors the Passenger object had during validation
 	private String errorLog = "";
 
 	// *** CONSTRUCTOR METHODS ***
@@ -97,29 +97,32 @@ public final class Passenger
 	public void validateInput(String item0, String item1, String item2,
 			String item3, String item4)
 	{
+		//Tries to validate if item0 is a suitable String for ID
 		try 
 		{
 			//Sets the ID to the String of item0
 			ID = item0;
 			
 			//Checks if the ID matches the dimensions and requirements required
-			if (!((ID.length() == 16 && ID.charAt(0) == 'T') || ID.equals("*") ||
-					(ID.length() == 7 && checkIfInt(ID))))
+			if (!((ID.length() == 16 && ID.charAt(0) == 'T') || 
+					ID.equals("*") || (ID.length() == 7 && checkIfInt(ID))))
 				//Throws specific exception using the invalid ID
 				throw new InvalidIdException(item0);
 		}
 		catch (InvalidIdException e) 
 		{
+			//Adds the InvalidException error to Passenger object's errorLog
 			addToErrorLog(e.toString());
 		}
 		
+		//Tries to validate if item1 is a suitable character for modality
 		try
 		{
-			//Checks if the given string is the size of a character. If it isn't,
-			//sets the character as a ? to raise an exception later
+			//Checks if the given string is the size of a character. If it is
+			//not, sets the character as a ? to raise an exception later
 			modality = item1.length() == 1 ? item1.charAt(0) : '?';
 			
-			//Checks if the modality matches dimensions and requirements required
+			//Checks if  modality matches dimensions and requirements required
 			if (!(modality == 'S' || modality == 'G' || modality == 'X' ||
 					modality == 'C' || modality == 'D'))
 				//Throws specific exception using the invalid modality format
@@ -127,29 +130,33 @@ public final class Passenger
 		}
 		catch (InvalidModalityException e) 
 		{
+			//Adds the InvalidModalityException error to Passenger's errorLog
 			addToErrorLog(e.toString());
 		}
 		
+		//Tries to validate if item2 is a suitable character for ageGroup
 		try
 		{
-			//Checks if the given string is the size of a character. If it isn't,
-			//sets the character as a ? to raise an exception later
+			//Checks if the given string is the size of a character. If it is
+			//not sets the character as a ? to raise an exception later
 			ageGroup = item2.length() == 1 ? item2.charAt(0) : '?';
 			
-			//Checks if the age matches the dimensions and requirements required
+			//Checks if age matches the dimensions and requirements required
 			if (!(ageGroup == 'C' || ageGroup == 'A' || ageGroup == 'S'))
 				//Throws specific exception using the invalid age format
 				throw new InvalidAgeException(item2);
 		}
 		catch (InvalidAgeException e) 
 		{
+			//Adds the InvalidAgeException error to Passenger's errorLog
 			addToErrorLog(e.toString());
 		}
 		
+		//Tries to validate if item3 is a suitable integer for hour
 		try
 		{
-			//Sets hour to -1 if it can't be converted to an int, otherwise parses
-			//item3 into hour as an integer
+			//Sets hour to -1 if it can't be converted to an int, otherwise 
+			//parses item3 into hour as an integer
 			hour = checkIfInt(item3) ? Integer.parseInt(item3) : -1;
 						
 			//Checks if hour falls within the 24 hour range
@@ -159,18 +166,20 @@ public final class Passenger
 		}
 		catch (InvalidHourException e) 
 		{
+			//Adds the InvalidHourException error to Passenger's errorLog
 			addToErrorLog(e.toString());
 		}
 		
+		//Tries to validate if item4 is a suitable integer for the date
 		try
 		{
-			//Sets date to -1 if it can't be converted to an int, otherwise parses
-			//item4 into date as an integer
+			//Sets date to -1 if it can't be converted to an int, otherwise
+			//parses item4 into date as an integer
 			date = checkIfInt(item4) ? Integer.parseInt(item4) : -1;
 			
-			//In industry, this will check via records if the date matches records
+			//In industry, will check via records if the date matches records
 			if (globalDate == -1)
-				//For this program, set first date in ridership.txt as global date
+				//For this program, set first date in rider ship as global date
 				globalDate = date;
 			else
 				//Checks if the date provided does not matches the global date
@@ -180,16 +189,15 @@ public final class Passenger
 		}
 		catch (InvalidDateException e) 
 		{
+			//Adds the InvalidDateException error to Passenger's errorLog
 			addToErrorLog(e.toString());
 		}
 		
+		//If there is content in errorLog, add the line and which number it is
+		//in the file to the end of errorLog
 		if (!(errorLog.equals("")))
-			errorLog += "On line " + MTOptimizer.getRiderCount() + ": \"" + MTOptimizer.getLine() + "\"";
-	}
-	
-	public void addToErrorLog(String e)
-	{	
-		errorLog +=  e + "\r\n";
+			errorLog += "On line " + MTOptimizer.getRiderCount() + ": \"" + 
+					MTOptimizer.getLine() + "\"";
 	}
 	
 	/**
@@ -214,6 +222,15 @@ public final class Passenger
 	}
 	
 	// *** MUTATOR METHODS ***
+	
+	/**
+	 * Adds an exception's string content to error log
+	 * @param e is the exception (must use .toString() on exception object)
+	 */
+	public void addToErrorLog(String e)
+	{	
+		errorLog +=  e + "\r\n";
+	}
 	
 	/**
 	 * Provides a value for how much space the passenger takes up on a Vehicle
@@ -267,6 +284,10 @@ public final class Passenger
 		return size;
 	}
 
+	/**
+	 * Getter used to access the getErrorLog attribute
+	 * @return String of the erroLog content the Passenger has
+	 */
 	public String getErrorLog()
 	{
 		return errorLog;
