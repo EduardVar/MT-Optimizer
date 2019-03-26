@@ -1,7 +1,7 @@
 /**
  * Author:	Eduard Varshavsky
  * NetID:	18ev
- * Date:	March 22, 2019
+ * Date:	March 25, 2019
  * Desc:	This class is used to store and calculate attributes of a passenger
  * 			Also used to catch any errors in input during instantiation.
  */
