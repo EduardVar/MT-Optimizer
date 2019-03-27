@@ -285,7 +285,7 @@ public final class Passenger
 	}
 
 	/**
-	 * Getter used to access the getErrorLog attribute
+	 * Getter used to access the errorLog attribute
 	 * @return String of the erroLog content the Passenger has
 	 */
 	public String getErrorLog()
