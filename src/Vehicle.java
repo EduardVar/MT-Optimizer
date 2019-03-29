@@ -67,6 +67,18 @@ public abstract class Vehicle
 		//New list to store the optimized Vehicle objects to serve current hour
 		ArrayList<Vehicle> fleet = new ArrayList<>();
 		
+		/*
+		 * NOTE:
+		 * I am aware there is a method in assembling the fleet by sorting the
+		 * tempAvailable list and then picking the highest capacity vehicles
+		 * until satisfied being an option for this problem.
+		 * 
+		 * I instead opted to implement a true optimization algorithm that
+		 * minimizes the amount of vehicles and also optimizes the space the
+		 * vehicles have to not send an excessively large vehicles to 
+		 * accommodate riders that don't meed tje,
+		 */
+		
 		//Keeps looping until leftToFill is "filled" --> THIS IS THE ALGORITHM
 		while (leftToFill > 0)
 		{
