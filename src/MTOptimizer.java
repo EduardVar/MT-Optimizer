@@ -1,6 +1,5 @@
 /**
  * Author:	Eduard Varshavsky
- * NetID:	18ev
  * Date:	March 28, 2019
  * Desc:	Main class of the project. Contains general attributes and logic to
  * 			run MT optimization and maintain attributes

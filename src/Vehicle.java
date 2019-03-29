@@ -1,6 +1,5 @@
 /**
  * Author:	Eduard Varshavsky
- * NetID:	18ev
  * Date:	March 22, 2019
  * Desc:	This is an abstract class for Vehicle sub-types to inherit from.
  * 			Contains general attributes and behaviors used by any vehicle.

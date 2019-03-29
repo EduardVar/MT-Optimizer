@@ -1,6 +1,5 @@
 /**
  * Author:	Eduard Varshavsky
- * NetID:	18ev
  * Date:	March 20, 2019
  * Desc:	Class inherited from Vehicle to store GO-Train related properties
  */

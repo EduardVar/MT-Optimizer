@@ -1,6 +1,5 @@
 /**
  * Author:	Eduard Varshavsky
- * NetID:	18ev
  * Date:	March 27, 2019
  * Desc:	Class inherited from Vehicle to store Street Car related properties
  */

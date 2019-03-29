@@ -1,6 +1,5 @@
 /**
  * Author:	Eduard Varshavsky
- * NetID:	18ev
  * Date:	March 27, 2019
  * Desc:	Custom exception class used for Invalid Age exceptions
  */
